@@ -11,11 +11,11 @@ Para  definir la la metadata, menus, roles, etc
 
 1) sincronize ls funciones y procedimientos del sistema
 2)  verifique que la primera linea de los datos sea la insercion del sistema correspondiente
-3)  exporte los datos a archivo SQL (desde la interface de sistema en sis_seguridad), 
+3)  exporte los datos a archivo SQL (desde la interface de sistema en sis_seguridad),
     verifique que la codificacion  se mantenga en UTF8 para no distorcionar los caracteres especiales
-4)  remplaze los sectores correspondientes en este archivo en su totalidad:  (el orden es importante)  
-                             menu, 
-                             funciones, 
+4)  remplaze los sectores correspondientes en este archivo en su totalidad:  (el orden es importante)
+                             menu,
+                             funciones,
                              procedimietnos
 
 */
@@ -47,7 +47,7 @@ VALUES (1, NULL, E'2013-02-25 09:23:51.125', NULL, E'activo', E'CMIM', E'Compra 
 --   (WF)  PROCESO MACRO, TIPOS DE PROCESO
 -----------------------------------------
 ---------------------------------
---COPY LINES TO data.sql FILE  
+--COPY LINES TO data.sql FILE
 ---------------------------------
 
 select wf.f_insert_tproceso_macro ('COMINT', 'Compra internacional', 'SI', 'activo', 'Adquisiciones');
@@ -67,7 +67,7 @@ select wf.f_insert_ttipo_estado ('vbactif', 'Visto Bueno Activos Fijos', 'no', '
 select wf.f_insert_ttipo_estado ('aprobado', 'Solicitud de Aprobada', 'no', 'no', 'no', 'anterior', '', 'depto_func_list', 'ADQ_DEPTO_SOL', '', 'activo', 'SOLCO', '');
 select wf.f_insert_ttipo_estado ('pendiente', 'Proceso pendiente', 'si', 'no', 'no', 'ninguno', '', 'depto_func_list', 'ADQ_DEPT_PROC', '', 'activo', 'PROC', '');
 select wf.f_insert_ttipo_estado ('proceso', 'Inicio de Proceso de COmpra', 'no', 'si', 'no', 'ninguno', '', 'anterior', '', 'cuando el proceso se inicia', 'activo', 'PROC', 'COT');
-select wf.f_insert_ttipo_estado ('finalizado', 'Proceso Finalizado', 'no', 'no', 'si', 'ninguno', '', 'anterior', '', 'El proceso esta finalizado  cuando, se declara decierto o cuando se finalizaron todas las 
+select wf.f_insert_ttipo_estado ('finalizado', 'Proceso Finalizado', 'no', 'no', 'si', 'ninguno', '', 'anterior', '', 'El proceso esta finalizado  cuando, se declara decierto o cuando se finalizaron todas las
 
 solcitudes', 'activo', 'PROC', '');
 select wf.f_insert_ttipo_estado ('desierto', 'Proceso Desierto', 'no', 'no', 'si', 'ninguno', '', 'anterior', '', '', 'activo', 'PROC', '');
@@ -134,10 +134,10 @@ SELECT * FROM param.f_inserta_documento('ADQ', 'OC', 'Orden de Compra', 'periodo
 
 /***********************************I-DAT-JRR-ADQ-104-04/04/2013****************************************/
 update adq.tcategoria_compra
-set id_proceso_macro = (select id_proceso_macro 
+set id_proceso_macro = (select id_proceso_macro
 						from wf.tproceso_macro
 						where codigo = 'COMINT');
-  
+
 /***********************************F-DAT-JRR-ADQ-104-04/04/2013****************************************/
 
 
@@ -195,20 +195,20 @@ VALUES (E'adq_tope_compra_lista_blanca', E' ', E'lista de codigos  UOs  que pued
 
 
 INSERT INTO pxp.variable_global ("variable", "valor", "descripcion")
-VALUES 
+VALUES
   (E'adq_precotizacion_obligatorio', E'si', E'Obliga a registrar proveedor de precotizacion al solitar compras');
 
 
 INSERT INTO pxp.variable_global ("variable", "valor", "descripcion")
-VALUES 
+VALUES
   (E'adq_comprometer_presupuesto', E'si', E'indica si el sistema de adq compromete presupeustos con la solictud de compra');
-  
+
 
 INSERT INTO pxp.variable_global ("variable", "valor", "descripcion")
-VALUES 
-  (E'adq_tolerancia_adjudicacion', E'0.2', E'% por el cual se puede adjudicar por demasia');  
-  
-     
+VALUES
+  (E'adq_tolerancia_adjudicacion', E'0.2', E'% por el cual se puede adjudicar por demasia');
+
+
 
 /***********************************F-DAT-RAC-ADQ-0-01/08/2017*****************************************/
 
@@ -219,54 +219,54 @@ VALUES
 
 
 INSERT INTO pxp.variable_global ("variable", "valor", "descripcion")
-VALUES 
+VALUES
   (E'adq_requiere_rpc', E'si', E'Si requiere RPC al finzaliar al solicitud');
-  
 
 
- 
+
+
 /***********************************F-DAT-RAC-ADQ-0-03/08/2017*****************************************/
 
 
 
 /***********************************I-DAT-RAC-ADQ-0-12/10/2017*****************************************/
-  
+
 INSERT INTO pxp.variable_global ("variable", "valor", "descripcion")
-VALUES 
+VALUES
   (E'adq_revisar_montos_categoria', E'no', E'revisar si el monto de la solcitud es coherente con la categoria seleccionado al fianlzar la  solicitud de compra');
-  
+
 /***********************************F-DAT-RAC-ADQ-0-12/10/2017*****************************************/
-  
-  
- 
+
+
+
 /***********************************I-DAT-RAC-ADQ-0-19/10/2017*****************************************/
-  
+
 INSERT INTO pxp.variable_global ("variable", "valor", "descripcion")
-VALUES 
+VALUES
   (E'adq_estado_reversion', E'desierto', E'codigo de estado de solicitud de compra donde se revierte el presupuesto, por ejemplo desierto');
-   
+
 /***********************************F-DAT-RAC-ADQ-0-19/10/2017*****************************************/
-  
-  
-  
-  
+
+
+
+
 /***********************************I-DAT-RAC-ADQ-0-09/01/2018*****************************************/
- 
+
  INSERT INTO pxp.variable_global ("variable", "valor", "descripcion")
-VALUES 
+VALUES
   (E'adq_estado_comprometido_sol', E'borrador', E'estao en el que se va compromter el presupuesto de la solicitud de compra');
-  
+
 
 /***********************************F-DAT-RAC-ADQ-0-09/01/2018*****************************************/
-   
-   
+
+
 /***********************************I-DAT-CAP-ADQ-0-13/08/2018*****************************************/
 INSERT INTO pxp.variable_global ( "variable", "valor", "descripcion")
 VALUES ( E'adq_adjudicar_con_presupuesto', E'si', E'no: para que NO verifique si existe monto disponible a momento de adjudicar un proveedor. si:valor por defecto para que SI verifique monto disponible a momento de adjudicar un proveedor');
 /***********************************F-DAT-CAP-ADQ-0-13/08/2018*****************************************/
 
 
-   
+
 /***********************************I-DAT-CAP-ADQ-0-03/12/2018*****************************************/
 
 
@@ -332,7 +332,7 @@ select pxp.f_insert_tgui ('Usuarios', 'Usuarios', 'GRUP.2', 'no', 0, 'sis_adquis
 select pxp.f_insert_tgui ('Usuarios', 'Usuarios', 'GRUP.2.1', 'no', 0, 'sis_seguridad/vista/usuario/Usuario.php', 5, '', 'usuario', 'ADQ');
 select pxp.f_insert_tgui ('Personas', 'Personas', 'GRUP.2.1.1', 'no', 0, 'sis_seguridad/vista/persona/Persona.php', 6, '', 'persona', 'ADQ');
 select pxp.f_insert_tgui ('Roles', 'Roles', 'GRUP.2.1.2', 'no', 0, 'sis_seguridad/vista/usuario_rol/UsuarioRol.php', 6, '', 'usuario_rol', 'ADQ');
-select pxp.f_insert_tgui ('EP\', 'EP\', 'GRUP.2.1.3', 'no', 0, 'sis_seguridad/vista/usuario_grupo_ep/UsuarioGrupoEp.php', 6, '', ', 
+select pxp.f_insert_tgui ('EP\', 'EP\', 'GRUP.2.1.3', 'no', 0, 'sis_seguridad/vista/usuario_grupo_ep/UsuarioGrupoEp.php', 6, '', ',
           width:400,
           cls:', 'ADQ');
 select pxp.f_insert_tgui ('Subir foto', 'Subir foto', 'GRUP.2.1.1.1', 'no', 0, 'sis_seguridad/vista/persona/subirFotoPersona.php', 7, '', 'subirFotoPersona', 'ADQ');
@@ -935,47 +935,47 @@ select pxp.f_insert_tgui ('Documentos del Proceso', 'Documentos del Proceso', 'S
 
 
 INSERT INTO pxp.variable_global ("variable", "valor", "descripcion")
-VALUES 
+VALUES
   (E'adq_requiere_rpc', E'si', E'Si requiere RPC al finzaliar al solicitud');
-  
 
 
- 
+
+
 /***********************************F-DAT-RAC-ADQ-0-03/08/2017*****************************************/
 
 
 
 /***********************************I-DAT-RAC-ADQ-0-12/10/2017*****************************************/
-  
+
 INSERT INTO pxp.variable_global ("variable", "valor", "descripcion")
-VALUES 
+VALUES
   (E'adq_revisar_montos_categoria', E'no', E'revisar si el monto de la solcitud es coherente con la categoria seleccionado al fianlzar la  solicitud de compra');
-  
+
 /***********************************F-DAT-RAC-ADQ-0-12/10/2017*****************************************/
-  
-  
- 
+
+
+
 /***********************************I-DAT-RAC-ADQ-0-19/10/2017*****************************************/
-  
+
 INSERT INTO pxp.variable_global ("variable", "valor", "descripcion")
-VALUES 
+VALUES
   (E'adq_estado_reversion', E'desierto', E'codigo de estado de solicitud de compra donde se revierte el presupuesto, por ejemplo desierto');
-   
+
 /***********************************F-DAT-RAC-ADQ-0-19/10/2017*****************************************/
-  
-  
-  
-  
+
+
+
+
 /***********************************I-DAT-RAC-ADQ-0-09/01/2018*****************************************/
- 
+
  INSERT INTO pxp.variable_global ("variable", "valor", "descripcion")
-VALUES 
+VALUES
   (E'adq_estado_comprometido_sol', E'borrador', E'estao en el que se va compromter el presupuesto de la solicitud de compra');
-  
+
 
 /***********************************F-DAT-RAC-ADQ-0-09/01/2018*****************************************/
-   
-   
+
+
 /***********************************I-DAT-CAP-ADQ-0-13/08/2018*****************************************/
 INSERT INTO pxp.variable_global ( "variable", "valor", "descripcion")
 VALUES ( E'adq_adjudicar_con_presupuesto', E'si', E'no: para que NO verifique si existe monto disponible a momento de adjudicar un proveedor. si:valor por defecto para que SI verifique monto disponible a momento de adjudicar un proveedor');
@@ -1013,3 +1013,7 @@ select wf.f_import_testructura_estado ('insert','aprobado','asignado','PRESOL',1
 select wf.f_import_testructura_estado ('insert','asignado','finalizado','PRESOL',1,'');
 /***********************************F-DAT-EGS-ADQ-1-19/02/2019*****************************************/
 
+
+/***********************************I-DAT-RCM-ADQ-0-26/09/2019*****************************************/
+UPDATE adq.tcategoria_compra SET obs = 'OC';
+/***********************************F-DAT-RCM-ADQ-0-26/09/2019*****************************************/
